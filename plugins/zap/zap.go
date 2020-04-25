@@ -1,6 +1,7 @@
 package zap
 
 import (
+	"gopkg.in/natefinch/lumberjack.v2"
 	"github.com/poembro/micro-service/basic"
 	"github.com/poembro/micro-service/basic/config"
 	"go.uber.org/zap"
