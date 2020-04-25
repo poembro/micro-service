@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"micro-service/basic"
+	"github.com/poembro/micro-service/basic"
 	"github.com/micro/go-micro/util/log"
 )
 

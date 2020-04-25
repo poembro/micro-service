@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	"micro-service/basic"
-	"micro-service/basic/common"
-	"micro-service/basic/config"
-	"micro-service/payment-srv/handler"
-	"micro-service/payment-srv/model"
-	s "micro-service/payment-srv/proto/payment"
+	"github.com/poembro/micro-service/basic"
+	"github.com/poembro/micro-service/basic/common"
+	"github.com/poembro/micro-service/basic/config"
+	"github.com/poembro/micro-service/payment-srv/handler"
+	"github.com/poembro/micro-service/payment-srv/model"
+	s "github.com/poembro/micro-service/payment-srv/proto/payment"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"

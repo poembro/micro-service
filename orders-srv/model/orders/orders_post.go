@@ -2,11 +2,11 @@ package orders
 
 import (
 	"context"
-	"micro-service/basic/common"
-	"micro-service/plugins/db"
+	"github.com/poembro/micro-service/basic/common"
+	"github.com/poembro/micro-service/plugins/db"
 	"github.com/micro/go-micro/util/log"
 
-	invS "micro-service/inventory-srv/proto/inventory"
+	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
 )
 
 // New 新增订单

@@ -1,6 +1,6 @@
 package main
 
 import (
-	_ "micro-service/plugins/redis"
-	_ "micro-service/plugins/zap"
+	_ "github.com/poembro/micro-service/plugins/redis"
+	_ "github.com/poembro/micro-service/plugins/zap"
 )

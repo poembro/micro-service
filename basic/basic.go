@@ -1,7 +1,7 @@
 package basic
 
 import (
-	"micro-service/basic/config"
+	"github.com/poembro/micro-service/basic/config"
 )
 
 var (

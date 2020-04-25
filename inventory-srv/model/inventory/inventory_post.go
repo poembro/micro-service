@@ -3,9 +3,9 @@ package inventory
 import (
 	"fmt"
 
-	"micro-service/basic/common"
-	proto "micro-service/inventory-srv/proto/inventory"
-	"micro-service/plugins/db"
+	"github.com/poembro/micro-service/basic/common"
+	proto "github.com/poembro/micro-service/inventory-srv/proto/inventory"
+	"github.com/poembro/micro-service/plugins/db"
 	"github.com/micro/go-micro/util/log"
 )
 

@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 
-	"micro-service/auth/handler"
-	"micro-service/auth/model"
-	s "micro-service/auth/proto/auth"
+	"github.com/poembro/micro-service/auth/handler"
+	"github.com/poembro/micro-service/auth/model"
+	s "github.com/poembro/micro-service/auth/proto/auth"
 
-	"micro-service/basic"
-	"micro-service/basic/common"
-	"micro-service/basic/config"
+	"github.com/poembro/micro-service/basic"
+	"github.com/poembro/micro-service/basic/common"
+	"github.com/poembro/micro-service/basic/config"
 
-	z "micro-service/plugins/zap"
+	z "github.com/poembro/micro-service/plugins/zap"
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/registry"

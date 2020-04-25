@@ -4,8 +4,8 @@ import (
 	"context"
 	"strconv"
 
-	"micro-service/auth/model/access"
-	auth "micro-service/auth/proto/auth"
+	"github.com/poembro/micro-service/auth/model/access"
+	auth "github.com/poembro/micro-service/auth/proto/auth"
 	log "github.com/micro/go-micro/v2/logger"
 )
 

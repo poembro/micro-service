@@ -9,7 +9,7 @@ go get -u github.com/golang/protobuf/protoc-gen-go
 ## 安装micro
 go get github.com/micro/micro/v2
 
-cd /data/web/main/golang/src/micro-service
+cd /data/web/main/golang/src/github.com/poembro/micro-service
 micro new --namespace=mu.micro.book --type=service --alias=user user-service
 
 

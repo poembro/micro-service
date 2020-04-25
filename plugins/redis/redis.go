@@ -2,8 +2,8 @@ package redis
 
 import (
 	r "github.com/go-redis/redis"
-	"micro-service/basic"
-	"micro-service/basic/config"
+	"github.com/poembro/micro-service/basic"
+	"github.com/poembro/micro-service/basic/config"
 	"github.com/micro/go-micro/util/log"
 	"strings"
 	"sync"

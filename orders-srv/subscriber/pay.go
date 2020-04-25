@@ -2,8 +2,8 @@ package subscriber
 
 import (
 	"context"
-	"micro-service/orders-srv/model/orders"
-	payS "micro-service/payment-srv/proto/payment"
+	"github.com/poembro/micro-service/orders-srv/model/orders"
+	payS "github.com/poembro/micro-service/payment-srv/proto/payment"
 	"github.com/micro/go-micro/util/log"
 )
 

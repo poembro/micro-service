@@ -1,8 +1,8 @@
 package orders
 
 import (
-	proto "micro-service/orders-srv/proto/orders"
-	"micro-service/plugins/db"
+	proto "github.com/poembro/micro-service/orders-srv/proto/orders"
+	"github.com/poembro/micro-service/plugins/db"
 	"github.com/micro/go-micro/util/log"
 )
 

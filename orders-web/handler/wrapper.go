@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	auth "micro-service/auth/proto/auth"
-	"micro-service/basic/common"
-	"micro-service/plugins/session"
+	auth "github.com/poembro/micro-service/auth/proto/auth"
+	"github.com/poembro/micro-service/basic/common"
+	"github.com/poembro/micro-service/plugins/session"
 	"github.com/micro/go-micro/util/log"
 )
 

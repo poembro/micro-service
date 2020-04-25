@@ -1,6 +1,6 @@
 package jwt
 
-import "micro-service/basic"
+import "github.com/poembro/micro-service/basic"
 
 // Jwt 配置 接口
 type Jwt struct {

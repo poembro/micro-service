@@ -1,8 +1,8 @@
 package zap
 
 import (
-	"micro-service/basic"
-	"micro-service/basic/config"
+	"github.com/poembro/micro-service/basic"
+	"github.com/poembro/micro-service/basic/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"

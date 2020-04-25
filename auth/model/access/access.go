@@ -5,9 +5,9 @@ import (
 	"sync"
 
 	r "github.com/go-redis/redis"
-	"micro-service/basic/config"
-	"micro-service/plugins/jwt"
-	"micro-service/plugins/redis"
+	"github.com/poembro/micro-service/basic/config"
+	"github.com/poembro/micro-service/plugins/jwt"
+	"github.com/poembro/micro-service/plugins/redis"
 	log "github.com/micro/go-micro/v2/logger"
 )
 

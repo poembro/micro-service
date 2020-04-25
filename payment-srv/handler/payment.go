@@ -2,10 +2,10 @@ package handler
 
 import (
 	"context"
-	"micro-service/payment-srv/model/payment"
+	"github.com/poembro/micro-service/payment-srv/model/payment"
 	"github.com/micro/go-micro/util/log"
 
-	proto "micro-service/payment-srv/proto/payment"
+	proto "github.com/poembro/micro-service/payment-srv/proto/payment"
 )
 
 var (

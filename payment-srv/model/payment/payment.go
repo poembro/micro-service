@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sync"
 
-	"micro-service/basic/common"
-	invS "micro-service/inventory-srv/proto/inventory"
-	ordS "micro-service/orders-srv/proto/orders"
+	"github.com/poembro/micro-service/basic/common"
+	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
+	ordS "github.com/poembro/micro-service/orders-srv/proto/orders"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 )

@@ -1,6 +1,6 @@
 package model
 
-import "micro-service/user-srv/model/user"
+import "github.com/poembro/micro-service/user-srv/model/user"
 
 // Init 初始化模型层
 func Init() {

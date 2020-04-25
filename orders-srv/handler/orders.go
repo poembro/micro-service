@@ -2,10 +2,10 @@ package handler
 
 import (
 	"context"
-	"micro-service/orders-srv/model/orders"
+	"github.com/poembro/micro-service/orders-srv/model/orders"
 	"github.com/micro/go-micro/util/log"
 
-	proto "micro-service/orders-srv/proto/orders"
+	proto "github.com/poembro/micro-service/orders-srv/proto/orders"
 )
 
 var (

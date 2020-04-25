@@ -1,7 +1,7 @@
 package model
 
 import (
-	"micro-service/inventory-srv/model/inventory"
+	"github.com/poembro/micro-service/inventory-srv/model/inventory"
 )
 
 // Init 初始化模型层

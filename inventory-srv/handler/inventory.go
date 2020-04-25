@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 
-	inv "micro-service/inventory-srv/model/inventory"
-	proto "micro-service/inventory-srv/proto/inventory"
+	inv "github.com/poembro/micro-service/inventory-srv/model/inventory"
+	proto "github.com/poembro/micro-service/inventory-srv/proto/inventory"
 	"github.com/micro/go-micro/util/log"
 )
 

@@ -1,6 +1,6 @@
 package main
 
 import (
-	_ "micro-service/plugins/session"
-	_ "micro-service/plugins/zap"
+	_ "github.com/poembro/micro-service/plugins/session"
+	_ "github.com/poembro/micro-service/plugins/zap"
 )

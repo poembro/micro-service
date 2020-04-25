@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"time"
 
-	auth "micro-service/auth/proto/auth"
-	invS "micro-service/inventory-srv/proto/inventory"
-	orders "micro-service/orders-srv/proto/orders"
-	"micro-service/plugins/session"
+	auth "github.com/poembro/micro-service/auth/proto/auth"
+	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
+	orders "github.com/poembro/micro-service/orders-srv/proto/orders"
+	"github.com/poembro/micro-service/plugins/session"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/util/log"
 )

@@ -2,8 +2,8 @@ package orders
 
 import (
 	"fmt"
-	invS "micro-service/inventory-srv/proto/inventory"
-	proto "micro-service/orders-srv/proto/orders"
+	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
+	proto "github.com/poembro/micro-service/orders-srv/proto/orders"
 	"github.com/micro/go-micro/client"
 	"sync"
 )

@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	"micro-service/basic"
-	"micro-service/basic/common"
-	"micro-service/basic/config"
-	"micro-service/inventory-srv/handler"
-	"micro-service/inventory-srv/model"
-	proto "micro-service/inventory-srv/proto/inventory"
+	"github.com/poembro/micro-service/basic"
+	"github.com/poembro/micro-service/basic/common"
+	"github.com/poembro/micro-service/basic/config"
+	"github.com/poembro/micro-service/inventory-srv/handler"
+	"github.com/poembro/micro-service/inventory-srv/model"
+	proto "github.com/poembro/micro-service/inventory-srv/proto/inventory"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"

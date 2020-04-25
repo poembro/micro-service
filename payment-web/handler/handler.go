@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"time"
 
-	auth "micro-service/auth/proto/auth"
-	payS "micro-service/payment-srv/proto/payment"
+	auth "github.com/poembro/micro-service/auth/proto/auth"
+	payS "github.com/poembro/micro-service/payment-srv/proto/payment"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/util/log"
 )

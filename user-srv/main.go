@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	"micro-service/basic"
-	"micro-service/basic/common"
-	"micro-service/basic/config"
-	"micro-service/user-srv/handler"
-	"micro-service/user-srv/model"
-	s "micro-service/user-srv/proto/user"
+	"github.com/poembro/micro-service/basic"
+	"github.com/poembro/micro-service/basic/common"
+	"github.com/poembro/micro-service/basic/config"
+	"github.com/poembro/micro-service/user-srv/handler"
+	"github.com/poembro/micro-service/user-srv/model"
+	s "github.com/poembro/micro-service/user-srv/proto/user"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"

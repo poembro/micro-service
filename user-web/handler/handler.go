@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	auth "micro-service/auth/proto/auth"
-	"micro-service/plugins/session"
-	us "micro-service/user-srv/proto/user"
+	auth "github.com/poembro/micro-service/auth/proto/auth"
+	"github.com/poembro/micro-service/plugins/session"
+	us "github.com/poembro/micro-service/user-srv/proto/user"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/util/log"
 )

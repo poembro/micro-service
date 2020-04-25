@@ -3,7 +3,7 @@ package payment
 import (
 	"context"
 	"github.com/google/uuid"
-	proto "micro-service/payment-srv/proto/payment"
+	proto "github.com/poembro/micro-service/payment-srv/proto/payment"
 	"github.com/micro/go-micro/util/log"
 	"time"
 )
