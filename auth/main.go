@@ -59,7 +59,7 @@ func main() {
 	)
 
 	// 注册服务
-	s.RegisterServiceHandler(service.Server(), new(handler.Service))
+	s.RegisterAuthHandler(service.Server(), new(handler.Service))
 
 	// 启动服务
 	if err := service.Run(); err != nil {

@@ -15,7 +15,7 @@ import (
 
 var (
 	serviceClient payS.PaymentService
-	authClient    auth.Service
+	authClient    auth.AuthService
 )
 
 // Error 错误结构体
@@ -26,7 +26,7 @@ type Error struct {
 
 func Init() {
 	serviceClient = payS.NewPaymentService("mu.micro.book.srv.payment", client.DefaultClient)
-	authClient = auth.NewService("mu.micro.book.srv.auth", client.DefaultClient)
+	authClient = auth.NewAuthService("mu.micro.book.srv.auth", client.DefaultClient)
 }
 
 // PayOrder 支付订单

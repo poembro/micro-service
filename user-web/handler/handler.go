@@ -16,7 +16,7 @@ import (
 
 var (
 	serviceClient us.UserService
-	authClient    auth.Service
+	authClient    auth.AuthService
 )
 
 // Error 错误结构体
@@ -29,8 +29,8 @@ func Init() {
 
 	fmt.Printf("%+v \r\n", client.DefaultClient)
 	
-	serviceClient = us.NewUserService("mu.micro.book.srv.user", client.DefaultClient)
-	authClient = auth.NewService("mu.micro.book.srv.auth", client.DefaultClient)
+	serviceClient = us.NewUserService("mu.micro.book.srv.user", client.NewClient())
+	authClient = auth.NewAuthService("mu.micro.book.srv.auth", client.NewClient())
 }
 
 // Login 登录入口

@@ -29,7 +29,7 @@ type Error struct {
 
 func Init() {
 	serviceClient = orders.NewOrdersService("mu.micro.book.srv.orders", client.DefaultClient)
-	authClient = auth.NewService("mu.micro.book.srv.auth", client.DefaultClient)
+	authClient = auth.NewAuthService("mu.micro.book.srv.auth", client.DefaultClient)
 }
 
 // New 新增订单入口
