@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -25,6 +26,9 @@ type Error struct {
 }
 
 func Init() {
+
+	fmt.Printf("%+v \r\n", client.DefaultClient)
+	
 	serviceClient = us.NewUserService("mu.micro.book.srv.user", client.DefaultClient)
 	authClient = auth.NewService("mu.micro.book.srv.auth", client.DefaultClient)
 }
