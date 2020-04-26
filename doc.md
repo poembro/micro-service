@@ -1,5 +1,62 @@
 ## go-micro是什么？(库) micro是什么(运行时工具集)
 
+go-micro 提供三种服务
+1. srv 内部RPC服务 
+2. 对外API服务
+3. 对外HTTP服务 
+
+-------------------------------------------------------------
+
+ ## micro 工具
+ 1.查看当前注册了多少服务
+[root@192 micro-service]# micro --registry=etcd --registry_address 192.168.3.222:2379 list services
+go.micro.http.broker
+mu.micro.book.srv.auth
+mu.micro.book.srv.user
+mu.micro.book.web.user
+
+2.设置网关(比如只写了rpc服务代码，不想写http部分)
+
+
+3.获取某服务原信息
+[root@192 micro-service]# micro --registry=etcd --registry_address 192.168.3.222:2379 get service mu.micro.book.srv.user
+service  mu.micro.book.srv.user
+
+version latest
+
+ID	Address	Metadata
+mu.micro.book.srv.user-eff9e5c2-a141-4110-9b78-fea0cf0d7643	192.168.3.222:35765	broker=http,protocol=mucp,registry=etcd,server=mucp,transport=http
+
+Endpoint: User.QueryUserByName
+
+Request: {
+	user_id string
+	user_name string
+	user_pwd string
+}
+
+Response: {
+	success bool
+	error Error {
+		code int32
+		detail string
+	}
+	user User {
+		id int64
+		name string
+		pwd string
+		created_time uint64
+		updated_time uint64
+	}
+}
+
+4.调用
+
+
+
+-------------------------------------------------------------
+
+
 ## go micro安装
 ## 安装go-micro
 go get github.com/micro/go-micro/v2
@@ -9,20 +66,13 @@ go get -u github.com/golang/protobuf/protoc-gen-go
 ## 安装micro
 go get github.com/micro/micro/v2
 
+## 生成代码
 cd /data/web/main/golang/src/github.com/poembro/micro-service
 micro new --namespace=mu.micro.book --type=service --alias=user user-service
 
-
+## 生成micro.pb
 --micro_out: protoc-gen-micro: 系统找不到指定的文件
 -- https://blog.csdn.net/zoeou/article/details/86739528
-
-
-go-micro 提供三种服务
-1. srv 内部RPC服务
-2. 对外API服务
-3. 对外HTTP服务
-
-micro-flag
 
 
 

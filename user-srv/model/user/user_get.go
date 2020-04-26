@@ -17,7 +17,7 @@ func (s *service) QueryUserByName(userName string) (ret *proto.User, err error) 
 	// 查询
 	err = o.QueryRow(queryString, userName).Scan(&ret.Id, &ret.Name, &ret.Pwd)
 	if err != nil {
-		log.Logf("[QueryUserByName] 查询数据失败，err：%s", err)
+		log.Logf("[QueryUserByName] 查询数据失败，sql:%s param: %s err：%s", queryString, userName, err)
 		return
 	}
 	return

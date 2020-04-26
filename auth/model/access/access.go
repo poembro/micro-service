@@ -8,7 +8,7 @@ import (
 	"github.com/poembro/micro-service/basic/config"
 	"github.com/poembro/micro-service/plugins/jwt"
 	"github.com/poembro/micro-service/plugins/redis"
-	log "github.com/micro/go-micro/v2/logger"
+	"github.com/micro/go-micro/util/log"
 )
 
 var (
@@ -56,7 +56,7 @@ func Init() {
 		panic(err)
 	}
 
-	log.Infof("[initCfg] 配置，cfg：%v", cfg)
+	log.Logf("[initCfg] 配置，cfg：%v", cfg)
 
 	ca = redis.Redis()
 

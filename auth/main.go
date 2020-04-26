@@ -10,19 +10,21 @@ import (
 	"github.com/poembro/micro-service/basic"
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/basic/config"
-
-	z "github.com/poembro/micro-service/plugins/zap"
-	"github.com/micro/cli/v2"
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/micro/go-plugins/config/source/grpc/v2"
 	
-	"go.uber.org/zap"
+	//z "github.com/poembro/micro-service/plugins/zap"
+
+	"github.com/micro/cli"
+	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-micro/registry/etcd"
+	"github.com/micro/go-micro/util/log"
+	"github.com/micro/go-plugins/config/source/grpc"
+
+	//"go.uber.org/zap"
 )
 
 var (
-	log     = z.GetLogger()
+	//log  *z.Logger   = z.GetLogger()
 	appName = "auth_srv"
 	cfg     = &authCfg{}
 )
@@ -48,13 +50,11 @@ func main() {
 
 	// 服务初始化
 	service.Init(
-		micro.Action(func(c *cli.Context) error {
+		micro.Action(func(c *cli.Context) {
 			// 初始化handler
 			model.Init()
 			// 初始化handler
 			handler.Init()
-
-			return nil
 		}),
 	)
 
@@ -63,7 +63,7 @@ func main() {
 
 	// 启动服务
 	if err := service.Run(); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
 
@@ -78,7 +78,6 @@ func registryOptions(ops *registry.Options) {
 }
 
 func initCfg() {
-	//configAddr := os.Getenv("MICRO_BOOK_CONFIG_GRPC_ADDR")
 	source := grpc.NewSource(
 		grpc.WithAddress("127.0.0.1:9600"),
 		grpc.WithPath("micro"),
@@ -86,14 +85,16 @@ func initCfg() {
 
 	basic.Init(
 		config.WithSource(source),
-		config.WithApp(appName),)
+		config.WithApp(appName),
+	)
+	
 
 	err := config.C().App(appName, cfg)
 	if err != nil {
 		panic(err)
 	}
 
-	log.Info("[initCfg] 配置", zap.Any("cfg", cfg))
+	log.Logf("[initCfg] 配置，cfg：%v", cfg)
 
 	return
 }
