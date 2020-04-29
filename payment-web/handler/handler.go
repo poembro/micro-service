@@ -9,8 +9,8 @@ import (
 
 	auth "github.com/poembro/micro-service/auth/proto/auth"
 	payS "github.com/poembro/micro-service/payment-srv/proto/payment"
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/util/log"
+	"github.com/micro/go-micro/v2/client"
+	log "github.com/micro/go-micro/v2/logger"
 )
 
 var (
@@ -34,7 +34,7 @@ func PayOrder(w http.ResponseWriter, r *http.Request) {
 
 	// 只接受POST请求
 	if r.Method != "POST" {
-		log.Logf("非法请求")
+		log.Infof("非法请求")
 		http.Error(w, "非法请求", 400)
 		return
 	}

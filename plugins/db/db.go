@@ -6,7 +6,8 @@ import (
 	"sync"
 
 	"github.com/poembro/micro-service/basic"
-	"github.com/micro/go-micro/util/log"
+	//log "github.com/micro/go-micro/v2/logger"
+	log "github.com/micro/go-micro/v2/logger"
 )
 
 var (
@@ -28,7 +29,7 @@ func initDB() {
 
 	if inited {
 		err = fmt.Errorf("[initDB] db 已经初始化过")
-		log.Logf(err.Error())
+		log.Infof(err.Error())
 		return
 	}
 

@@ -7,11 +7,11 @@ import (
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/basic/config"
 	"github.com/poembro/micro-service/orders-web/handler"
-	"github.com/micro/cli"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-micro/registry/etcd"
-	"github.com/micro/go-micro/util/log"
-	"github.com/micro/go-micro/web"
+	"github.com/micro/cli/v2"
+	"github.com/micro/go-micro/v2/registry"
+	"github.com/micro/go-micro/v2/registry/etcd"
+	log "github.com/micro/go-micro/v2/logger"
+	"github.com/micro/go-micro/v2/web"
 	"github.com/micro/go-plugins/config/source/grpc"
 	"net/http"
 )
@@ -42,7 +42,7 @@ func main() {
 
 	// 初始化服务
 	if err := service.Init(
-		web.Action(func(c *cli.Context) {
+		web.Action(func(c *cli.Context) error {
 			// 初始化handler
 			handler.Init()
 		}),
@@ -85,7 +85,7 @@ func initCfg() {
 		panic(err)
 	}
 
-	log.Logf("[initCfg] 配置，cfg：%v", cfg)
+	log.Infof("[initCfg] 配置，cfg：%v", cfg)
 
 	return
 }

@@ -7,7 +7,7 @@ import (
 	auth "github.com/poembro/micro-service/auth/proto/auth"
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/plugins/session"
-	"github.com/micro/go-micro/util/log"
+	log "github.com/micro/go-micro/v2/logger"
 )
 
 // AuthWrapper 认证wrapper
@@ -31,19 +31,19 @@ func AuthWrapper(next http.Handler) http.Handler {
 				if userId != 0 {
 					rsp, err := authClient.GetCachedAccessToken(context.TODO(), &auth.Request{ UserId: userId, })
 					if err != nil {
-						log.Logf("[AuthWrapper]，err：%s", err)
+						log.Infof("[AuthWrapper]，err：%s", err)
 						http.Error(w, "非法请求", 400)
 						return
 					}
 
 					// token不一致
 					if rsp.Token != ck.Value {
-						log.Logf("[AuthWrapper]，token不一致")
+						log.Infof("[AuthWrapper]，token不一致")
 						http.Error(w, "非法请求", 400)
 						return
 					}
 				} else {
-					log.Logf("[AuthWrapper]，session不合法，无用户id")
+					log.Infof("[AuthWrapper]，session不合法，无用户id")
 					http.Error(w, "非法请求", 400)
 					return
 				}

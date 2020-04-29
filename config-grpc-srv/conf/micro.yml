@@ -1,4 +1,9 @@
 micro:
+  api_srv:
+    name: mu.micro.book.srv.api
+    address: 127.0.0.1
+    port: 9020
+    version: v1.0
   auth_srv:
     name: mu.micro.book.srv.auth
     address: 127.0.0.1

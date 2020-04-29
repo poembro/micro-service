@@ -3,7 +3,8 @@ package user
 import (
 	"github.com/poembro/micro-service/plugins/db"
 	proto "github.com/poembro/micro-service/user-srv/proto/user"
-	"github.com/micro/go-micro/util/log"
+	//log "github.com/micro/go-micro/v2/logger"
+	log "github.com/micro/go-micro/v2/logger"
 )
 
 func (s *service) QueryUserByName(userName string) (ret *proto.User, err error) {
@@ -17,7 +18,7 @@ func (s *service) QueryUserByName(userName string) (ret *proto.User, err error) 
 	// 查询
 	err = o.QueryRow(queryString, userName).Scan(&ret.Id, &ret.Name, &ret.Pwd)
 	if err != nil {
-		log.Logf("[QueryUserByName] 查询数据失败，sql:%s param: %s err：%s", queryString, userName, err)
+		log.Infof("[QueryUserByName] 查询数据失败，sql:%s param: %s err：%s", queryString, userName, err)
 		return
 	}
 	return

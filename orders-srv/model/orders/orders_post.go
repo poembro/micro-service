@@ -4,19 +4,17 @@ import (
 	"context"
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/plugins/db"
-	"github.com/micro/go-micro/util/log"
-
+	 
+	log "github.com/micro/go-micro/v2/logger"
 	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
 )
 
 // New 新增订单
 func (s *service) New(bookId int64, userId int64) (orderId int64, err error) {
 	// 请求销存
-	rsp, err := invClient.Sell(context.TODO(), &invS.Request{
-		BookId: bookId, UserId: userId,
-	})
+	rsp, err := invClient.Sell(context.TODO(), &invS.Request{ BookId: bookId, UserId: userId,})
 	if err != nil {
-		log.Logf("[New] Sell 调用库存服务时失败：%s", err.Error())
+		log.Infof("[New] Sell 调用库存服务时失败：%s", err.Error())
 		return
 	}
 
@@ -26,7 +24,7 @@ func (s *service) New(bookId int64, userId int64) (orderId int64, err error) {
 
 	r, err := o.Exec(insertSQL, userId, bookId, rsp.InvH.Id, common.InventoryHistoryStateNotOut)
 	if err != nil {
-		log.Logf("[New] 新增订单失败，err：%s", err)
+		log.Infof("[New] 新增订单失败，err：%s", err)
 		return
 	}
 	orderId, _ = r.LastInsertId()
@@ -42,7 +40,7 @@ func (s *service) UpdateOrderState(orderId int64, state int) (err error) {
 	// 更新
 	_, err = o.Exec(updateSQL, state, orderId)
 	if err != nil {
-		log.Logf("[Confirm] 更新失败，err：%s", err)
+		log.Infof("[Confirm] 更新失败，err：%s", err)
 		return
 	}
 	return

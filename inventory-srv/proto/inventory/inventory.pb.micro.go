@@ -11,8 +11,9 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	api "github.com/micro/go-micro/v2/api"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -27,9 +28,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Reference imports to suppress errors if they are not otherwise used.
+var _ api.Endpoint
 var _ context.Context
 var _ client.Option
 var _ server.Option
+
+// Api Endpoints for Inventory service
+
+func NewInventoryEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
 
 // Client API for Inventory service
 
@@ -44,12 +52,6 @@ type inventoryService struct {
 }
 
 func NewInventoryService(name string, c client.Client) InventoryService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "mu.micro.book.srv.inventory"
-	}
 	return &inventoryService{
 		c:    c,
 		name: name,
@@ -58,7 +60,6 @@ func NewInventoryService(name string, c client.Client) InventoryService {
 
 func (c *inventoryService) Sell(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
 	req := c.c.NewRequest(c.name, "Inventory.Sell", in)
-
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {

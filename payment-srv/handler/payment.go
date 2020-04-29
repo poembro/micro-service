@@ -3,7 +3,7 @@ package handler
 import (
 	"context"
 	"github.com/poembro/micro-service/payment-srv/model/payment"
-	"github.com/micro/go-micro/util/log"
+	log "github.com/micro/go-micro/v2/logger"
 
 	proto "github.com/poembro/micro-service/payment-srv/proto/payment"
 )
@@ -22,7 +22,7 @@ func Init() {
 
 // New 新增订单
 func (e *Service) PayOrder(ctx context.Context, req *proto.Request, rsp *proto.Response) (err error) {
-	log.Log("[PayOrder] 收到支付请求")
+	log.Info("[PayOrder] 收到支付请求")
 	err = paymentService.PayOrder(req.OrderId)
 	if err != nil {
 		rsp.Success = false

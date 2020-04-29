@@ -7,8 +7,8 @@ import (
 	"github.com/poembro/micro-service/basic/common"
 	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
 	ordS "github.com/poembro/micro-service/orders-srv/proto/orders"
-	"github.com/micro/go-micro"
-	"github.com/micro/go-micro/client"
+	"github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/client"
 )
 
 var (

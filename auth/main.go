@@ -13,11 +13,11 @@ import (
 	
 	//z "github.com/poembro/micro-service/plugins/zap"
 
-	"github.com/micro/cli"
-	"github.com/micro/go-micro"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-micro/registry/etcd"
-	"github.com/micro/go-micro/util/log"
+	"github.com/micro/cli/v2"
+	"github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/registry"
+	"github.com/micro/go-micro/v2/registry/etcd"
+	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-plugins/config/source/grpc"
 
 	//"go.uber.org/zap"
@@ -50,11 +50,12 @@ func main() {
 
 	// 服务初始化
 	service.Init(
-		micro.Action(func(c *cli.Context) {
+		micro.Action(func(c *cli.Context) error {
 			// 初始化handler
 			model.Init()
 			// 初始化handler
 			handler.Init()
+			return nil
 		}),
 	)
 
@@ -94,7 +95,7 @@ func initCfg() {
 		panic(err)
 	}
 
-	log.Logf("[initCfg] 配置，cfg：%v", cfg)
+	log.Infof("[initCfg] 配置，cfg：%v", cfg)
 
 	return
 }

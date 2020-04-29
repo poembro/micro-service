@@ -4,7 +4,7 @@ import (
 	"fmt"
 	invS "github.com/poembro/micro-service/inventory-srv/proto/inventory"
 	proto "github.com/poembro/micro-service/orders-srv/proto/orders"
-	"github.com/micro/go-micro/client"
+	"github.com/micro/go-micro/v2/client"
 	"sync"
 )
 

@@ -3,7 +3,8 @@ package db
 import (
 	"database/sql"
 	"github.com/poembro/micro-service/basic/config"
-	"github.com/micro/go-micro/util/log"
+	//log "github.com/micro/go-micro/v2/logger"
+	log "github.com/micro/go-micro/v2/logger"
 	"time"
 )
 
@@ -21,18 +22,18 @@ type Mysql struct {
 }
 
 func initMysql() {
-	log.Logf("[initMysql] 初始化Mysql")
+	log.Infof("[initMysql] 初始化Mysql")
 
 	c := config.C()
 	cfg := &db{}
 
 	err := c.App("db", cfg)
 	if err != nil {
-		log.Logf("[initMysql] %s", err)
+		log.Infof("[initMysql] %s", err)
 	}
 
 	if !cfg.Mysql.Enable {
-		log.Logf("[initMysql] 未启用Mysql")
+		log.Infof("[initMysql] 未启用Mysql")
 		return
 	}
 
@@ -56,5 +57,5 @@ func initMysql() {
 		log.Fatal(err)
 	}
 
-	log.Logf("[initMysql] Mysql 连接成功")
+	log.Infof("[initMysql] Mysql 连接成功")
 }

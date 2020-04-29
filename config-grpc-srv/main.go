@@ -11,7 +11,8 @@ import (
 
 	"github.com/micro/go-micro/config"
 	"github.com/micro/go-micro/config/source/file"
-	"github.com/micro/go-micro/util/log"
+ 
+	log "github.com/micro/go-micro/v2/logger"
 	proto "github.com/micro/go-plugins/config/source/grpc/proto"
 	grpc2 "google.golang.org/grpc"
 )
@@ -29,7 +30,7 @@ func main() {
 	// 灾难恢复
 	defer func() {
 		if r := recover(); r != nil {
-			log.Logf("[main] Recovered in f %v", r)
+			log.Infof("[main] Recovered in f %v", r)
 		}
 	}()
 
@@ -46,7 +47,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Logf("configServer started")
+	log.Infof("configServer started")
 
 	// 启动
 	err = service.Serve(ts)
@@ -57,7 +58,7 @@ func main() {
 
 func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.ReadResponse, err error) {
 	appName := parsePath(req.Path)
-	//log.Logf("#### config-grpc-srv  Read 读取  ")
+	//log.Infof("#### config-grpc-srv  Read 读取  ")
 	rsp = &proto.ReadResponse{
 		ChangeSet: getConfig(appName),
 	}
@@ -66,12 +67,12 @@ func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.R
 
 func (s Service) Watch(req *proto.WatchRequest, server proto.Source_WatchServer) (err error) {
 	appName := parsePath(req.Path)
-	//log.Logf("#### config-grpc-srv  Watch 监听  ")
+	//log.Infof("#### config-grpc-srv  Watch 监听  ")
 	rsp := &proto.WatchResponse{
 		ChangeSet: getConfig(appName),
 	}
 	if err = server.Send(rsp); err != nil {
-		log.Logf("[Watch] 侦听处理异常，%s", err)
+		log.Infof("[Watch] 侦听处理异常，%s", err)
 		return err
 	}
 
@@ -105,7 +106,7 @@ func loadAndWatchConfigFile() (err error) {
 				return
 			}
 
-			log.Logf("[loadAndWatchConfigFile] 文件变动，%s", string(v.Bytes()))
+			log.Infof("[loadAndWatchConfigFile] 文件变动，%s", string(v.Bytes()))
 		}
 	}()
 
@@ -116,7 +117,7 @@ func loadAndWatchConfigFile() (err error) {
 func getConfig(appName string) *proto.ChangeSet {
 	bytes := config.Get(appName).Bytes()
 
-	log.Logf("[getConfig] appName：%s", appName)
+	log.Infof("[getConfig] appName：%s", appName)
 	return &proto.ChangeSet{
 		Data:      bytes, //具体的配置比特码
 		Checksum:  fmt.Sprintf("%x", md5.Sum(bytes)), //本次请求的数据签名，用于判断data是否传输完成

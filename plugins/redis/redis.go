@@ -4,7 +4,8 @@ import (
 	r "github.com/go-redis/redis"
 	"github.com/poembro/micro-service/basic"
 	"github.com/poembro/micro-service/basic/config"
-	"github.com/micro/go-micro/util/log"
+	//log "github.com/micro/go-micro/v2/logger"
+	log "github.com/micro/go-micro/v2/logger"
 	"strings"
 	"sync"
 )
@@ -53,41 +54,41 @@ func initRedis() {
 	defer m.Unlock()
 
 	if inited {
-		log.Log("[initRedis] 已经初始化过Redis...")
+		log.Infof("[initRedis] 已经初始化过Redis...")
 		return
 	}
 
-	log.Log("[initRedis] 初始化Redis...")
+	log.Infof("[initRedis] 初始化Redis...")
 
 	c := config.C()
 	cfg := &redis{}
 	err := c.App("redis", cfg)
 	if err != nil {
-		log.Logf("[initRedis] %s", err)
+		log.Infof("[initRedis] %s", err)
 	}
 
 	if !cfg.Enabled {
-		log.Logf("[initRedis] 未启用redis")
+		log.Infof("[initRedis] 未启用redis")
 		return
 	}
 
 	// 加载哨兵模式
 	if cfg.Sentinel != nil && cfg.Sentinel.Enabled {
-		log.Log("[initRedis] 初始化Redis，哨兵模式...")
+		log.Infof("[initRedis] 初始化Redis，哨兵模式...")
 		initSentinel(cfg)
 	} else { // 普通模式
-		log.Log("[initRedis] 初始化Redis，普通模式...")
+		log.Infof("[initRedis] 初始化Redis，普通模式...")
 		initSingle(cfg)
 	}
 
-	log.Log("[initRedis] 初始化Redis，检测连接...")
+	log.Infof("[initRedis] 初始化Redis，检测连接...")
 
 	pong, err := client.Ping().Result()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	log.Logf("[initRedis] 初始化Redis，检测连接Ping... %s", pong)
+	log.Infof("[initRedis] 初始化Redis，检测连接Ping... %s", pong)
 }
 
 // Redis 获取redis

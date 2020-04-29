@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync" 
 	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/util/log"
+	log "github.com/micro/go-micro/v2/logger"
 )
 
 var (
@@ -60,7 +60,7 @@ func (c *cnf) init(ops Options) (err error) {
 	defer m.Unlock()
 
 	if inited {
-		log.Logf("[init] 配置已经初始化过")
+		log.Infof("[init] 配置已经初始化过")
 		return
 	}
 
@@ -74,7 +74,7 @@ func (c *cnf) init(ops Options) (err error) {
 	}
 
 	go func() {
-		log.Logf("[init] 侦听配置变动 ...  %s", ops.AppName ) //每个应用basic.Init(进来的值)
+		log.Infof("[init] 侦听配置变动 ...  %s", ops.AppName ) //每个应用basic.Init(进来的值)
 
 		// 开始侦听变动事件
 		watcher, err := c.conf.Watch()
@@ -88,7 +88,7 @@ func (c *cnf) init(ops Options) (err error) {
 				log.Fatal(err)
 			}
 
-			log.Logf("[init] 侦听配置变动: %v", string(v.Bytes()))
+			log.Infof("[init] 侦听配置变动: %v", string(v.Bytes()))
 		}
 	}()
 
