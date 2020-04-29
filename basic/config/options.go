@@ -10,6 +10,7 @@ type Options struct {
 
 type Option func(o *Options)
 
+//####监控配置第二步 
 func WithSource(src source.Source) Option {
 	return func(o *Options) {
 		o.Sources = append(o.Sources, src)

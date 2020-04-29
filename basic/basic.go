@@ -16,6 +16,7 @@ type Options struct {
 
 type Option func(o *Options)
 
+//####监控配置第三步 
 func Init(opts ...config.Option) {
 	// 初始化配置
 	config.Init(opts...)

@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	mux        sync.RWMutex
+	mux  sync.RWMutex
 	configMaps = make(map[string]*proto.ChangeSet)
 	// 根据需要改成可配置的app列表
 	apps = []string{"micro"}
@@ -57,7 +57,7 @@ func main() {
 
 func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.ReadResponse, err error) {
 	appName := parsePath(req.Path)
-
+	//log.Logf("#### config-grpc-srv  Read 读取  ")
 	rsp = &proto.ReadResponse{
 		ChangeSet: getConfig(appName),
 	}
@@ -66,6 +66,7 @@ func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.R
 
 func (s Service) Watch(req *proto.WatchRequest, server proto.Source_WatchServer) (err error) {
 	appName := parsePath(req.Path)
+	//log.Logf("#### config-grpc-srv  Watch 监听  ")
 	rsp := &proto.WatchResponse{
 		ChangeSet: getConfig(appName),
 	}

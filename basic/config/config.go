@@ -2,8 +2,7 @@ package config
 
 import (
 	"fmt"
-	"sync"
-
+	"sync" 
 	"github.com/micro/go-micro/config"
 	"github.com/micro/go-micro/util/log"
 )
@@ -13,7 +12,7 @@ var (
 	inited bool
 
 	// 默认配置器
-	c = &configurator{}
+	c = &cnf{}
 )
 
 // Configurator 配置器
@@ -22,14 +21,18 @@ type Configurator interface {
 	Path(path string, config interface{}) (err error)
 }
 
-// configurator 配置器
-type configurator struct {
+// c 配置器
+func C() Configurator {
+	return c
+}
+
+// cnf 配置器
+type cnf struct {
 	conf    config.Config
 	appName string
 }
 
-func (c *configurator) App(name string, config interface{}) (err error) {
-
+func (c *cnf) App(name string, config interface{}) (err error) { 
 	v := c.conf.Get(name)
 	if v != nil {
 		err = v.Scan(config)
@@ -40,7 +43,7 @@ func (c *configurator) App(name string, config interface{}) (err error) {
 	return
 }
 
-func (c *configurator) Path(path string, config interface{}) (err error) {
+func (c *cnf) Path(path string, config interface{}) (err error) {
 	v := c.conf.Get(c.appName, path)
 	if v != nil {
 		err = v.Scan(config)
@@ -51,12 +54,8 @@ func (c *configurator) Path(path string, config interface{}) (err error) {
 	return
 }
 
-// c 配置器
-func C() Configurator {
-	return c
-}
-
-func (c *configurator) init(ops Options) (err error) {
+//####监控配置第五步 
+func (c *cnf) init(ops Options) (err error) {
 	m.Lock()
 	defer m.Unlock()
 
@@ -65,7 +64,7 @@ func (c *configurator) init(ops Options) (err error) {
 		return
 	}
 
-	c.conf = config.NewConfig()
+	c.conf = config.NewConfig() //框架自带
 	c.appName = ops.AppName
 
 	// 加载配置
@@ -75,8 +74,7 @@ func (c *configurator) init(ops Options) (err error) {
 	}
 
 	go func() {
-
-		log.Logf("[init] 侦听配置变动 ...")
+		log.Logf("[init] 侦听配置变动 ...  %s", ops.AppName ) //每个应用basic.Init(进来的值)
 
 		// 开始侦听变动事件
 		watcher, err := c.conf.Watch()
@@ -99,6 +97,8 @@ func (c *configurator) init(ops Options) (err error) {
 	return
 }
 
+
+//####监控配置第四步 
 // Init 初始化配置
 func Init(opts ...Option) {
 
@@ -107,7 +107,7 @@ func Init(opts ...Option) {
 		o(&ops)
 	}
 
-	c = &configurator{}
+	c = &cnf{}
 
 	c.init(ops)
 }

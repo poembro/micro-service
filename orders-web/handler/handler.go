@@ -48,18 +48,13 @@ func New(w http.ResponseWriter, r *http.Request) {
 	response := map[string]interface{}{}
 
 	// 调用后台服务
-	rsp, err := serviceClient.New(context.TODO(), &orders.Request{
-		BookId: bookId,
-		UserId: session.GetSession(w, r).Values["userId"].(int64),
-	})
+	rsp, err := serviceClient.New(context.TODO(), &orders.Request{ BookId: bookId, UserId: session.GetSession(w, r).Values["userId"].(int64), })
 
 	// 返回结果
 	response["ref"] = time.Now().UnixNano()
 	if err != nil {
 		response["success"] = false
-		response["error"] = Error{
-			Detail: err.Error(),
-		}
+		response["error"] = Error{ Detail: err.Error(), }
 	} else {
 		response["success"] = true
 		response["orderId"] = rsp.Order.Id
@@ -73,8 +68,7 @@ func New(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
-//
+ 
 func Hello(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hello"))
 }

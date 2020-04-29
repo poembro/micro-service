@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	r "github.com/go-redis/redis"
+	rds "github.com/go-redis/redis"
 	"github.com/poembro/micro-service/basic/config"
 	"github.com/poembro/micro-service/plugins/jwt"
 	"github.com/poembro/micro-service/plugins/redis"
@@ -13,7 +13,7 @@ import (
 
 var (
 	s   *service
-	ca  *r.Client
+	ca  *rds.Client
 	m   sync.RWMutex
 	cfg = &jwt.Jwt{}
 )

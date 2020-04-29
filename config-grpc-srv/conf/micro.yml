@@ -3,6 +3,7 @@ micro:
     name: mu.micro.book.srv.auth
     address: 127.0.0.1
     port: 9030
+    version: v1.0
     zap:
       level: error
       development: false
@@ -28,24 +29,29 @@ micro:
     name: mu.micro.book.srv.inventory
     address: 127.0.0.1
     port: 9040
+    version: v1.0
   jwt:
     secretKey: W6VjDud2W1kMG3BicbMNlGgI4ZfcoHtMGLWr
   orders_srv:
     name: mu.micro.book.srv.orders
     address: 127.0.0.1
     port: 9050
+    version: v1.0
   orders_web:
     name: mu.micro.book.web.orders
     address: 127.0.0.1
     port: 9060
+    version: v1.0
   payment_srv:
     name: mu.micro.book.srv.payment
     address: 127.0.0.1
     port: 9070
+    version: v1.0
   payment_web:
     name: mu.micro.book.web.payment
     address: 127.0.0.1
     port: 9080
+    version: v1.0
   redis:
     enabled: true
     conn: 127.0.0.1:6379

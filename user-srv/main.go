@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-
+    "time"
 	"github.com/poembro/micro-service/basic"
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/basic/config"
@@ -35,9 +35,11 @@ func main() {
 
 	// 新建服务
 	service := micro.NewService(
-		micro.Name("mu.micro.book.srv.user"),
+		micro.Name(cfg.Name),
+		micro.RegisterTTL(time.Second*15),
+		micro.RegisterInterval(time.Second*10), 
 		micro.Registry(micReg),
-		micro.Version("latest"),
+		micro.Version(cfg.Version),
 	)
 
 	// 服务初始化
@@ -74,8 +76,11 @@ func initCfg() {
 		grpc.WithAddress("127.0.0.1:9600"),
 		grpc.WithPath("micro"),
 	)
-
-	basic.Init(config.WithSource(source))
+    //####监控配置第一步 
+	basic.Init(
+		config.WithSource(source),
+		config.WithApp(appName),
+	)
 
 	err := config.C().App(appName, cfg)
 	if err != nil {

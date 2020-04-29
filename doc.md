@@ -1,9 +1,15 @@
+##
+go mod 开发时 代码没有提交到github.com/xxx  直接go run 会走外网
+需要修改 项目目录 go.mod            
+replace github.com/poembro/micro-service => /data/web/main/golang/src/micro-service  
+
 ## go-micro是什么？(库) micro是什么(运行时工具集)
 
 go-micro 提供三种服务
 1. srv 内部RPC服务 
 2. 对外API服务
 3. 对外HTTP服务 
+
 
 -------------------------------------------------------------
 
@@ -51,7 +57,7 @@ Response: {
 }
 
 4.调用
-
+micro --registry=etcd call mu.micro.book.srv.user User.QueryUserByName '{"userName":"micro"}'
 
 
 -------------------------------------------------------------
@@ -224,3 +230,10 @@ nideshop-mini-program
 xiaoyibo
 
 zzjx
+
+
+
+
+nohup etcd --name cd0   --data-dir=/data/db/etcd/cd0   --initial-advertise-peer-urls http://0.0.0.0:2380   --listen-peer-urls http://0.0.0.0:2380   --listen-client-urls http://0.0.0.0:2379   --advertise-client-urls http://0.0.0.0:2379  --initial-cluster-token etcd-cluster-1   --initial-cluster cd0=http://0.0.0.0:2380,cd1=http://0.0.0.0:2480,cd2=http://0.0.0.0:2580   --initial-cluster-state new &
+nohup etcd --name cd1   --data-dir=/data/db/etcd/cd1   --initial-advertise-peer-urls http://0.0.0.0:2480   --listen-peer-urls http://0.0.0.0:2480   --listen-client-urls http://0.0.0.0:2479   --advertise-client-urls http://0.0.0.0:2479  --initial-cluster-token etcd-cluster-1   --initial-cluster cd0=http://0.0.0.0:2380,cd1=http://0.0.0.0:2480,cd2=http://0.0.0.0:2580   --initial-cluster-state new &
+nohup etcd --name cd2   --data-dir=/data/db/etcd/cd2   --initial-advertise-peer-urls http://0.0.0.0:2580   --listen-peer-urls http://0.0.0.0:2580   --listen-client-urls http://0.0.0.0:2579   --advertise-client-urls http://0.0.0.0:2579  --initial-cluster-token etcd-cluster-1   --initial-cluster cd0=http://0.0.0.0:2380,cd1=http://0.0.0.0:2480,cd2=http://0.0.0.0:2580   --initial-cluster-state new &

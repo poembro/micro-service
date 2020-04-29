@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-
+    "time"
 	"github.com/poembro/micro-service/basic"
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/basic/config"
@@ -35,6 +35,8 @@ func main() {
 	service := web.NewService(
 		web.Name(cfg.Name),
 		web.Version(cfg.Version),
+		web.RegisterTTL(time.Second*15),
+		web.RegisterInterval(time.Second*10),
 		web.Registry(micReg),
 		web.Address(cfg.Addr()),
 	)
@@ -77,7 +79,10 @@ func initCfg() {
 		grpc.WithPath("micro"),
 	)
 
-	basic.Init(config.WithSource(source))
+	basic.Init(
+		config.WithSource(source),
+		config.WithApp(appName),
+	)
 
 	err := config.C().App(appName, cfg)
 	if err != nil {

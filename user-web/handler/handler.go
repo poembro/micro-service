@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	serviceClient us.UserService
+	userClient us.UserService
 	authClient    auth.AuthService
 )
 
@@ -25,15 +25,13 @@ type Error struct {
 	Detail string `json:"detail"`
 }
 
-func Init() {
-
+func Init() { 
 	fmt.Printf("%+v \r\n", client.DefaultClient)
-	
-	serviceClient = us.NewUserService("mu.micro.book.srv.user", client.NewClient())
-	authClient = auth.NewAuthService("mu.micro.book.srv.auth", client.NewClient())
+	userClient = us.NewUserService("mu.micro.book.srv.user", client.DefaultClient)
+	authClient = auth.NewAuthService("mu.micro.book.srv.auth", client.DefaultClient)
 }
 
-// Login 登录入口
+// Login 登录入口  curl -X POST 'http://127.0.0.1:10000/user/login' -H "Content-Type: application/x-www-form-urlencoded" -d 'userName=micro&pwd=1234'
 func Login(w http.ResponseWriter, r *http.Request) {
 
 	// 只接受POST请求
@@ -44,20 +42,18 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	r.ParseForm()
-
+	log.Logf("111")
 	// 调用后台服务
-	rsp, err := serviceClient.QueryUserByName(context.TODO(), &us.Request{
+	rsp, err := userClient.QueryUserByName(context.TODO(), &us.Request{
 		UserName: r.Form.Get("userName"),
 	})
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-
+	log.Logf("222")
 	// 返回结果
-	response := map[string]interface{}{
-		"ref": time.Now().UnixNano(),
-	}
+	response := map[string]interface{}{ "ref": time.Now().UnixNano(), }
 
 	if rsp.User.Pwd == r.Form.Get("pwd") {
 		response["success"] = true
@@ -68,10 +64,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		log.Logf("[Login] 密码校验完成，生成token...")
 
 		// 生成token
-		rsp2, err := authClient.MakeAccessToken(context.TODO(), &auth.Request{
-			UserId:   rsp.User.Id,
-			UserName: rsp.User.Name,
-		})
+		rsp2, err := authClient.MakeAccessToken(context.TODO(), &auth.Request{UserId: rsp.User.Id, UserName: rsp.User.Name,})
 		if err != nil {
 			log.Logf("[Login] 创建token失败，err：%s", err)
 			http.Error(w, err.Error(), 500)
@@ -126,9 +119,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 删除token
-	_, err = authClient.DelUserAccessToken(context.TODO(), &auth.Request{
-		Token: tokenCookie.Value,
-	})
+	_, err = authClient.DelUserAccessToken(context.TODO(), &auth.Request{Token: tokenCookie.Value,})
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return

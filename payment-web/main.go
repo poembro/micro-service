@@ -42,11 +42,10 @@ func main() {
 
 	// 初始化服务
 	if err := service.Init(
-		web.Action(
-			func(c *cli.Context) {
-				// 初始化handler
-				handler.Init()
-			}),
+		web.Action(func(c *cli.Context) {
+			// 初始化handler
+			handler.Init()
+		}),
 	); err != nil {
 		log.Fatal(err)
 	}

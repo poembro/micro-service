@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-
+	"fmt" 
 	"github.com/poembro/micro-service/basic"
 	"github.com/poembro/micro-service/basic/common"
 	"github.com/poembro/micro-service/basic/config"
